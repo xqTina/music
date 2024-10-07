@@ -9,4 +9,7 @@ public class TestController {
     public String test(){
         return "Hello world!";
     }
+    public void test2(){
+        System.out.println("test");
+    }
 }

@@ -14,11 +14,12 @@ import java.util.List;
 ServiceImpl是一个泛型类，需要指定两个类型参数：一个是Mapper接口（BannerMapper），另一个是实体类（Banner）。
 selectLis是ServiceImpl的方法
 */
+@Service
 public class BannerServiceImpl extends ServiceImpl<BannerMapper, Banner>
         implements BannerService {
 
-    @Autowired
    private  BannerMapper bannerMapper;
+
     @Cacheable(value = "banner", key = "'list'")  //放在缓存中 redis 是以key-value进行存储的
     @Override
     public List<Banner> getAllBanner() {

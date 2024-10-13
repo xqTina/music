@@ -8,4 +8,6 @@ import com.example.yin.model.request.CommentRequest;
 public interface CommentService extends IService<Comment> {
     R addComment(CommentRequest addCommentRequest);
     R deleteComment(Integer id);
+    R commentOfSongId(Integer songId);
+    R updateCommentMsg(CommentRequest upCommentRequest);
 }

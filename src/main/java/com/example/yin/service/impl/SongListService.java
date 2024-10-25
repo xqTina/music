@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface SongListService   {
     R allSongList();
+
     List<SongList> findAllSong();
 
     R likeStyle(String s);

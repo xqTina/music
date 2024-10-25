@@ -1,0 +1,14 @@
+2024-10-22 15:31:34 INFO [com.example.yin.MusicJavaApplication]: Starting MusicJavaApplication using Java 1.8.0_201 on LAPTOP-SASHBGRP with PID 14144 (D:\2024-projects\music-java\music-java\target\classes started by qing in D:\2024-projects\music-java\music-java)
+2024-10-22 15:31:34 INFO [com.example.yin.MusicJavaApplication]: No active profile set, falling back to default profiles: default
+2024-10-22 15:31:34 INFO [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]: Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-22 15:31:34 INFO [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]: For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-22 15:31:34 INFO [org.springframework.data.repository.config.RepositoryConfigurationDelegate]: Multiple Spring Data modules found, entering strict repository configuration mode!
+2024-10-22 15:31:34 INFO [org.springframework.data.repository.config.RepositoryConfigurationDelegate]: Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-22 15:31:34 INFO [org.springframework.data.repository.config.RepositoryConfigurationDelegate]: Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2024-10-22 15:31:35 INFO [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]: Tomcat initialized with port(s): 8888 (http)
+2024-10-22 15:31:35 INFO [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]: Root WebApplicationContext: initialization completed in 1579 ms
+2024-10-22 15:31:37 INFO [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer]: LiveReload server is running on port 35729
+2024-10-22 15:31:37 INFO [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]: Tomcat started on port(s): 8888 (http) with context path ''
+2024-10-22 15:31:37 INFO [com.example.yin.MusicJavaApplication]: Started MusicJavaApplication in 3.719 seconds (JVM running for 5.337)
+2024-10-22 15:31:57 INFO [org.springframework.web.servlet.DispatcherServlet]: Initializing Servlet 'dispatcherServlet'
+2024-10-22 15:31:57 INFO [org.springframework.web.servlet.DispatcherServlet]: Completed initialization in 2 ms

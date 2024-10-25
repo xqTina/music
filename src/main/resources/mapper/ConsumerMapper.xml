@@ -17,5 +17,9 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     </resultMap>
+    <select id="verifyPassword" resultType="java.lang.Integer">
+        select count(*) from consumer where name=#{0} and password=#{1}
+    </select>
+
 
 </mapper>

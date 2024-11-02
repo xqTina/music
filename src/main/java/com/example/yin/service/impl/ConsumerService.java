@@ -14,6 +14,8 @@ public interface ConsumerService {
     public  Boolean update(Consumer consumer);
     /**删除*/
     public  Boolean delete(Integer id);
+    /**查询所有用户*/
+    public List<Consumer> allConsumer();
     /**修改密码*/
     public Boolean editPassword(String username,String password);
     /**根据用户名查询*/

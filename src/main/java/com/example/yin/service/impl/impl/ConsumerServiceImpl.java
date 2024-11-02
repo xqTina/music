@@ -49,6 +49,14 @@ public class ConsumerServiceImpl implements ConsumerService {
     }
 
     /**
+     * 查询所有用户
+     */
+    @Override
+    public List<Consumer> allConsumer() {
+        return consumerMapper.allConsumer();
+    }
+
+    /**
      * 修改密码
      *
      * @param username

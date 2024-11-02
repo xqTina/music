@@ -15,7 +15,9 @@ public interface ConsumerMapper {
     public  int update(Consumer consumer);
     /**删除*/
     public  int delete(Integer id);
-    /**修改密码*/
+    /**查询所有用户*/
+    public List<Consumer> allConsumer();
+    /**验证密码*/
     public int editPassword(String username,String password);
     /**根据用户名查询*/
     public List<Consumer> getByUsername(String username);

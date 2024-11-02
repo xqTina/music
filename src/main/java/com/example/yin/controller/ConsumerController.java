@@ -18,11 +18,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
-
+@RequestMapping("/consumer")
 public class ConsumerController {
     @Autowired
     private ConsumerService consumerService;
-    @RequestMapping(value = "/consumer/login/status",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/login/status",method = RequestMethod.POST)
     public Object loginStatus(HttpServletRequest request, HttpSession session){
         JSONObject jsonObject = new JSONObject();
         String username =request.getParameter("username");
@@ -39,7 +40,7 @@ public class ConsumerController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/consumer/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     public Object addConsumer(HttpServletRequest request){
         JSONObject jsonObject =  new JSONObject();
         String username = request.getParameter("username").trim();
@@ -90,7 +91,7 @@ public class ConsumerController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/consumer/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Object updateConsumer(HttpServletRequest request){
         JSONObject jsonObject = new JSONObject();
         String id = request.getParameter("id").trim();
@@ -141,14 +142,14 @@ public class ConsumerController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/consumer/delete",method = RequestMethod.GET)
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public Object deleteConsumer(HttpServletRequest request){
         String id = request.getParameter("id").trim();
         Boolean flag = consumerService.delete(Integer.parseInt(id));
         return flag;
     }
     /*更新用户图片*/
-    @RequestMapping(value = "/consumer/updateConsumerPic",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateConsumerPic",method = RequestMethod.POST)
     public Object updateConsumerPic(@RequestParam("file")MultipartFile avatorFile ,@RequestParam("id") int id){
         JSONObject jsonObject =new JSONObject();
         if(avatorFile.isEmpty()){
@@ -158,17 +159,18 @@ public class ConsumerController {
         }
         //文件名=当前时间到毫秒+原来文件名
         String fileName = System.currentTimeMillis()+avatorFile.getOriginalFilename();
-        String filePath = System.getProperty("username.dir")+System.getProperty("file.separator")+"img";
+        String filePath = System.getProperty("username.dir")+System.getProperty("file.separator")+"img/avatorImages";
         File file1= new File(filePath);
         if(file1.exists()){
             file1.mkdir();
         }
         //实际文件地址
         File dest = new File(filePath+System.getProperty("file.separator")+fileName);
-        String storeAvatorPath = "/img"+fileName;
+        String storeAvatorPath = "/img/avatorImages"+fileName;
         try{
             avatorFile.transferTo(dest);
             Consumer consumer = new Consumer();
+            consumer.setId(id);
             consumer.setAvator(storeAvatorPath);
             boolean flag =consumerService.update(consumer);
             if (flag){

@@ -123,9 +123,16 @@
         from id=#{id}
     </delete>
 
+    <select id="allConsumer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from consumer
+    </select>
+
     <select id="verifyPassword" resultType="java.lang.Integer">
         select count(*) from consumer where name=#{0} and password=#{1}
     </select>
+
     <select id="editPassword" resultType="java.lang.Integer" parameterType="java.util.HashMap">
         select count(*)
         from consumer

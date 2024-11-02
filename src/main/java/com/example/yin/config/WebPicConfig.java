@@ -11,6 +11,7 @@ public class WebPicConfig implements WebMvcConfigurer {
     //TODO 这个配置类的目的是什么  就是注册了一个类似于拦截器吧  看到对应的资源 会将其修改成相应的地址
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //前端用户头像地址
         registry.addResourceHandler("/img/avatorImages/**")
                 .addResourceLocations(Constants.AVATOR_IMAGES_PATH);
         registry.addResourceHandler("/img/singerPic/**")
@@ -23,6 +24,7 @@ public class WebPicConfig implements WebMvcConfigurer {
                 .addResourceLocations(Constants.SONGLIST_PIC_PATH);
         registry.addResourceHandler("/img/swiper/**")
                 .addResourceLocations(Constants.BANNER_PIC_PATH);
+
     }
 
 }

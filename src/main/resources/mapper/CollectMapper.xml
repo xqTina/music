@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yin.mapper.CollectMapper">
+  <resultMap id="BaseResultMap" type="com.example.yin.model.domin.Collect">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="song_id" property="songId" jdbcType="INTEGER" />
+    <result column="song_list_id" property="songListId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, type ,song_id, song_list_id, create_time,
+  </sql>
+  <insert id="insert" parameterType="com.example.yin.model.domin.Collect">
+    insert into collect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id !=null">
+        id,
+      </if>
+      <if test="userId !=null">
+        userId,
+      </if>
+      <if test="type !=null">
+        type,
+      </if>
+      <if test="songId !=null">
+        songId,
+      </if>
+      <if test="songListId !=null">
+        song_list_id,
+      </if>
+      create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="">
+      <if test="id != null">
+        #{id},
+      </if>
+      <if test="userId != null">
+        #{userId},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="songId != null">
+        #{songId},
+      </if>
+      <if test="songListId != null">
+        #{song_list_id},
+      </if>
+      now(),
+    </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from collect
+    where id=#{id}
+  </delete>
+  <select id="allCollect" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from collect
+  </select>
+  <select id="collectOfUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from  collect
+    where userId =#{userId}
+  </select>
+
+  <select id="existSongId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_column_List"/>
+    from collect
+    where user_id = #{userId} and song_id= #{songId}
+  </select>
+
+  <select id="existSongListId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_column_List"/>
+    from collect
+    where user_id =#{userId} and song_List_id=#{songListId}
+  </select>
+
+</mapper>

@@ -28,7 +28,7 @@
                 id,
             </if>
             <if test="username != null">
-                usernamae,
+                username,
             </if>
             <if test="password !=null">
                 password,
@@ -58,7 +58,7 @@
                 #{id},
             </if>
             <if test="username != null">
-                #{usernamae},
+                #{username},
             </if>
             <if test="password !=null">
                 #{password},
@@ -90,7 +90,7 @@
         update consumer
         <set>
             <if test="username != null">
-                username = #{usernamae},
+                username = #{username},
             </if>
             <if test="password !=null">
                 password = #{password},
@@ -120,7 +120,7 @@
     </update>
     <delete id="delete" parameterType="java.lang.Integer">
         delete from consumer
-        from id=#{id}
+        where id=#{id}
     </delete>
 
     <select id="allConsumer" resultMap="BaseResultMap">
@@ -130,7 +130,7 @@
     </select>
 
     <select id="verifyPassword" resultType="java.lang.Integer">
-        select count(*) from consumer where name=#{0} and password=#{1}
+        select count(*) from consumer where username=#{0} and password=#{1}
     </select>
 
     <select id="editPassword" resultType="java.lang.Integer" parameterType="java.util.HashMap">

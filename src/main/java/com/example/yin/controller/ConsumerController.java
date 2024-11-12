@@ -1,46 +1,60 @@
 package com.example.yin.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.example.yin.model.domin.Consumer;
+import com.example.yin.common.R;
+import com.example.yin.model.request.ConsumerRequest;
 import com.example.yin.service.impl.ConsumerService;
-import com.example.yin.utils.Consts;
+import com.example.yin.service.impl.impl.ConsumerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import com.example.yin.model.domin.ResetPasswordRequest;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 @RestController
-@RequestMapping("/consumer")
 public class ConsumerController {
     @Autowired
     private ConsumerService consumerService;
+    @Autowired
+    private ConsumerServiceImpl consumerServiceimpl;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
-    @RequestMapping(value = "/login/status",method = RequestMethod.POST)
-    public Object loginStatus(HttpServletRequest request, HttpSession session){
-        JSONObject jsonObject = new JSONObject();
-        String username =request.getParameter("username");
-        String password = request.getParameter("password");
-        Boolean flag= consumerService.verifyPassword(username,password);
-        if(flag){
-            jsonObject.put(Consts.CODE,1);
-            jsonObject.put(Consts.MSG,"登录成功");
-            session.setAttribute(Consts.USERNAME,username);
-            return jsonObject;
-        }
-        jsonObject.put(Consts.CODE,0);
-        jsonObject.put(Consts.MSG,"用户名或密码错误");
-        return jsonObject;
+
+    @PostMapping("/consumer/login/status")
+    public R loginStatus(@RequestBody ConsumerRequest consumerRequest, HttpSession session) {
+        return consumerService.verityPasswd(consumerRequest, session);
+    }
+    @PostMapping("/consumer/add")
+    public R addUser(@RequestBody ConsumerRequest registryRequest) {
+        return consumerService.addUser(registryRequest);
     }
 
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
+
+
+    /**
+     * 密码恢复（忘记密码）
+     */
+
+    @PostMapping("/user/resetPassword")
+    public R resetPassword(@RequestBody ResetPasswordRequest passwordRequest){
+        String code = stringRedisTemplate.opsForValue().get("code");
+        ConsumerRequest consumerRequest=new ConsumerRequest();
+        System.out.println(consumerRequest);
+        consumerRequest.setPassword(passwordRequest.getPassword());
+        consumerServiceimpl.updatePassword01(consumerRequest);
+        return R.success("密码修改成功");
+    }
+
+    @PostMapping("/user/avatar/update")
+    public R updateUserPic(@RequestParam("file") MultipartFile avatorFile, @RequestParam("id") int id) {
+        return consumerService.updateUserAvator(avatorFile, id);
+    }
+
+
+/*    @RequestMapping(value = "/add",method = RequestMethod.POST)
     public Object addConsumer(HttpServletRequest request){
         JSONObject jsonObject =  new JSONObject();
         String username = request.getParameter("username").trim();
@@ -89,9 +103,9 @@ public class ConsumerController {
         jsonObject.put(Consts.CODE,0);
         jsonObject.put(Consts.MSG,"添加失败");
         return jsonObject;
-    }
+    }*/
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
+/*    @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Object updateConsumer(HttpServletRequest request){
         JSONObject jsonObject = new JSONObject();
         String id = request.getParameter("id").trim();
@@ -140,16 +154,16 @@ public class ConsumerController {
         jsonObject.put(Consts.CODE,0);
         jsonObject.put(Consts.MSG,"修改失败");
         return jsonObject;
-    }
+    }*/
 
-    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+ /*   @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public Object deleteConsumer(HttpServletRequest request){
         String id = request.getParameter("id").trim();
         Boolean flag = consumerService.delete(Integer.parseInt(id));
         return flag;
-    }
+    }*/
     /*更新用户图片*/
-    @RequestMapping(value = "/updateConsumerPic",method = RequestMethod.POST)
+/*    @RequestMapping(value = "/updateConsumerPic",method = RequestMethod.POST)
     public Object updateConsumerPic(@RequestParam("file")MultipartFile avatorFile ,@RequestParam("id") int id){
         JSONObject jsonObject =new JSONObject();
         if(avatorFile.isEmpty()){
@@ -189,5 +203,5 @@ public class ConsumerController {
             return jsonObject;
         }
 
-    }
+    }*/
 }

@@ -10,7 +10,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, type ,song_id, song_list_id, create_time,
+    id, user_id, type ,song_id, song_list_id, create_time
   </sql>
   <insert id="insert" parameterType="com.example.yin.model.domin.Collect">
     insert into collect

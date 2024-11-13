@@ -42,17 +42,18 @@ public class ConsumerController {
         consumerServiceimpl.updatePassword01(consumerRequest);
         return R.success("密码修改成功");
     }
-
+//修改头像
     @PostMapping("/user/avatar/update")
     public R updateUserPic(@RequestParam("file") MultipartFile avatorFile, @RequestParam("id") int id) {
         return consumerService.updateUserAvator(avatorFile, id);
     }
+    //用户信息
     @GetMapping("/user/detail")
     public R userOfId(@RequestParam int id) {
         return consumerService.userOfId(id);
     }
 
-
+//用户删除
     @GetMapping("/user/delete")
     public R deleteUser(@RequestParam int id) {
         return consumerService.deleteUser(id);
@@ -62,6 +63,12 @@ public class ConsumerController {
     public R updateUserMsg(@RequestBody ConsumerRequest updateRequest) {
         return consumerService.updateUserMsg(updateRequest);
     }
+
+    @PostMapping("/user/updatePassword")
+    public R updatePassword(@RequestBody ConsumerRequest updatePasswordRequest) {
+        return consumerService.updatePassword(updatePasswordRequest);
+    }
+
 
 
 /*    @RequestMapping(value = "/add",method = RequestMethod.POST)

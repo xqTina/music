@@ -22,11 +22,6 @@ public class ConsumerController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-
-    @PostMapping("/consumer/login/status")
-    public R loginStatus(@RequestBody ConsumerRequest consumerRequest, HttpSession session) {
-        return consumerService.verityPasswd(consumerRequest, session);
-    }
     @PostMapping("/consumer/add")
     public R addUser(@RequestBody ConsumerRequest registryRequest) {
         return consumerService.addUser(registryRequest);
@@ -51,6 +46,21 @@ public class ConsumerController {
     @PostMapping("/user/avatar/update")
     public R updateUserPic(@RequestParam("file") MultipartFile avatorFile, @RequestParam("id") int id) {
         return consumerService.updateUserAvator(avatorFile, id);
+    }
+    @GetMapping("/user/detail")
+    public R userOfId(@RequestParam int id) {
+        return consumerService.userOfId(id);
+    }
+
+
+    @GetMapping("/user/delete")
+    public R deleteUser(@RequestParam int id) {
+        return consumerService.deleteUser(id);
+    }
+
+    @PostMapping("/user/update")
+    public R updateUserMsg(@RequestBody ConsumerRequest updateRequest) {
+        return consumerService.updateUserMsg(updateRequest);
     }
 
 

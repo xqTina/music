@@ -22,7 +22,7 @@ import static com.example.yin.constant.Constants.SALT;
 public  class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper ,Consumer> implements ConsumerService{
     @Autowired
     private ConsumerMapper consumerMapper;
-    @Override
+/*    @Override
     public R verityPasswd(ConsumerRequest consumerRequest, HttpSession session) {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username",consumerRequest.getUsername());
@@ -33,7 +33,7 @@ public  class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper ,Consumer> 
         }else{
             return  R.success("用户名或密码错误");
         }
-    }
+    }*/
 //新增用户
     @Override
     public R addUser(ConsumerRequest registryRequest) {
@@ -92,7 +92,6 @@ public  class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper ,Consumer> 
         if (!this.verityPasswd(updatePasswordRequest.getUsername(),updatePasswordRequest.getOldPassword())) {
             return R.error("密码输入错误");
         }
-
         Consumer consumer = new Consumer();
         consumer.setId(updatePasswordRequest.getId());
         String secretPassword = DigestUtils.md5DigestAsHex((SALT + updatePasswordRequest.getPassword()).getBytes(StandardCharsets.UTF_8));
